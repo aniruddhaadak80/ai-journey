@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Sparkles, Heart } from "lucide-react";
 import { getSiteUrl } from "@/lib/site";
 
-const GITHUB_URL = "https://github.com/aniruddhaadak/ai-journey";
+const GITHUB_URL = "https://github.com/aniruddhaadak80/ai-journey";
 
 /** Inline GitHub mark — lucide v1 dropped brand icons. */
 function GitHubMark({ className }: { className?: string }) {
@@ -79,7 +79,7 @@ export default function Footer() {
           <span>
             Built by{" "}
             <a
-              href="https://github.com/aniruddhaadak"
+              href="https://github.com/aniruddhaadak80"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-cyan-300 transition-colors"

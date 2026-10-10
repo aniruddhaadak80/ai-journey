@@ -57,7 +57,7 @@ bun run assets
 
 ## Asking a question
 
-Open a [GitHub Discussion](https://github.com/aniruddhaadak/ai-journey/discussions)
+Open a [GitHub Discussion](https://github.com/aniruddhaadak80/ai-journey/discussions)
 or an issue. For factual corrections to the content specifically, use the
 **Content correction** template — it routes faster because it asks for the
 supporting source up front.

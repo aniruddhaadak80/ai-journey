@@ -41,7 +41,7 @@ officially representing the project in public spaces.
 
 If you see or experience unacceptable behaviour, or have any other concerns,
 please report it via a
-[private security advisory](https://github.com/aniruddhaadak/ai-journey/security/advisories/new)
+[private security advisory](https://github.com/aniruddhaadak80/ai-journey/security/advisories/new)
 or by contacting the maintainer directly.
 
 All complaints will be reviewed and investigated promptly and fairly. The

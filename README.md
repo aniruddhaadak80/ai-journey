@@ -16,7 +16,7 @@
 [![Bun](https://img.shields.io/badge/Bun-1.3-fbf0f1?logo=bun)](https://bun.sh)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22d3ee)](LICENSE)
 
-[![CI](https://github.com/aniruddhaadak/ai-journey/actions/workflows/ci.yml/badge.svg)](https://github.com/aniruddhaadak/ai-journey/actions/workflows/ci.yml)
+[![CI](https://github.com/aniruddhaadak80/ai-journey/actions/workflows/ci.yml/badge.svg)](https://github.com/aniruddhaadak80/ai-journey/actions/workflows/ci.yml)
 [![Deploy](https://img.shields.io/badge/Vercel-Live-22d3ee?logo=vercel)](https://ai-journey.vercel.app)
 
 </div>
@@ -634,13 +634,13 @@ This project stands on the shoulders of people who wrote things down. Every clai
 - **3Blue1Brown** and **Lex Fridman** for the video explanations
 - **Anthropic**, **OpenAI**, **Google DeepMind**, **Meta AI**, **Mistral**, **DeepSeek**, **Alibaba** for primary documentation
 
-The deep-dive explanations are written from those primary sources. If you spot an error, [open an issue](https://github.com/aniruddhaadak/ai-journey/issues) — corrections are very welcome.
+The deep-dive explanations are written from those primary sources. If you spot an error, [open an issue](https://github.com/aniruddhaadak80/ai-journey/issues) — corrections are very welcome.
 
 ---
 
 ## 📄 License
 
-MIT © [Aniruddha Adak](https://github.com/aniruddhaadak) — see [LICENSE](LICENSE).
+MIT © [Aniruddha Adak](https://github.com/aniruddhaadak80) — see [LICENSE](LICENSE).
 
 <p align="center">
   <img src="public/banner.svg" alt="AI Journey" width="820" />

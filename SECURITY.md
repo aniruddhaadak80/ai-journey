@@ -21,7 +21,7 @@ If you believe you've found a genuine security issue, please report it privately
 rather than opening a public issue:
 
 👉
-[**Report a vulnerability**](https://github.com/aniruddhaadak/ai-journey/security/advisories/new)
+[**Report a vulnerability**](https://github.com/aniruddhaadak80/ai-journey/security/advisories/new)
 
 Please include:
 
