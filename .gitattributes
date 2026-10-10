@@ -1,0 +1,35 @@
+# Normalize line endings so the repo is byte-identical on every platform.
+* text=auto eol=lf
+
+# Windows scripts must keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Lockfiles and generated data stay exactly as produced.
+bun.lock -diff linguist-generated=true
+bun.lockb -diff linguist-generated=true
+
+# Binary / asset files — never diff these.
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+
+# Generated assets: real files, but not hand-edited — flag as generated so
+# GitHub collapses them in diffs and Linguist attributes them correctly.
+public/logo.svg linguist-generated=true
+public/banner.svg linguist-generated=true
+public/og.svg linguist-generated=true
+public/favicon.svg linguist-generated=true
+public/apple-touch-icon.svg linguist-generated=true
+docs/images/*.svg linguist-generated=true
+src/data/content.ts linguist-generated=false
+
+# Docs
+*.md text
+LICENSE text
