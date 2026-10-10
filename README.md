@@ -9,6 +9,8 @@
 
 ### The complete interactive history of artificial intelligence — from Turing's question to autonomous agents.
 
+**🚀 Live at <https://ai-journey-eight.vercel.app>** · **📦 [GitHub](https://github.com/aniruddhaadak80/ai-journey)** · runs locally with zero configuration and zero API keys.
+
 [![Next.js](https://img.shields.io/badge/Next.js-16-000?logo=next.js)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19-087ea4?logo=react)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript)](https://www.typescriptlang.org)
@@ -17,7 +19,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-22d3ee)](LICENSE)
 
 [![CI](https://github.com/aniruddhaadak80/ai-journey/actions/workflows/ci.yml/badge.svg)](https://github.com/aniruddhaadak80/ai-journey/actions/workflows/ci.yml)
-[![Deploy](https://img.shields.io/badge/Vercel-Live-22d3ee?logo=vercel)](https://ai-journey.vercel.app)
+[![Deploy](https://img.shields.io/badge/Vercel-Live-22d3ee?logo=vercel)](https://ai-journey-eight.vercel.app)
 
 </div>
 
@@ -539,11 +541,15 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full guide and style rules.
 
 **Vercel** is the primary target. The app is fully static, so it deploys as prerendered HTML on the edge.
 
-```bash
-vercel --prod
-```
+| | |
+|---|---|
+| 🔴 **Live** | <https://ai-journey-eight.vercel.app> |
+| 📦 **GitHub** | [aniruddhaadak80/ai-journey](https://github.com/aniruddhaadak80/ai-journey) |
+| 🏠 **Homepage** | set to the live URL above |
 
-Or connect the repo in the Vercel dashboard — every push to `main` redeploys automatically.
+Push to `main` and Vercel rebuilds automatically via
+[`.github/workflows/deploy-vercel.yml`](.github/workflows/deploy-vercel.yml).
+Or connect the repo in the Vercel dashboard.
 
 <details>
 <summary><b>Docker</b></summary>
