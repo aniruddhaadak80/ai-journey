@@ -1,0 +1,23 @@
+stateDiagram-v2
+    [*] --> Closed
+
+    Closed --> Open : click era card
+    Open --> ConceptClosed : click a concept
+    ConceptClosed --> ConceptOpen : click again
+
+    state Open {
+        [*] --> ConceptClosed
+        ConceptClosed --> ConceptOpen
+    }
+
+    state ConceptOpen {
+        [*] --> Showing
+        Showing --> Showing : switch depth level
+    }
+
+    Open --> Closed : click era card
+
+    note right of Closed
+        Content is server-rendered.
+        Expansion is client state only.
+    end note

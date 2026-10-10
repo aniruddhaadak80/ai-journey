@@ -1,0 +1,28 @@
+flowchart TB
+    DEV["Developer edits data or UI"] --> COMMIT["git commit"]
+    COMMIT --> HOOK["bun run verify"]
+    HOOK --> V1{"validate<br/>content FKs"}
+    HOOK --> V2{"validate:svg<br/>well-formed"}
+    HOOK --> V3{"typecheck<br/>tsc --noEmit"}
+    HOOK --> V4{"lint<br/>eslint"}
+    HOOK --> V5{"test<br/>bun test"}
+    HOOK --> V6{"build<br/>next build"}
+
+    V1 -->|fail| FIX1["report dangling id"] --> DEV
+    V2 -->|fail| FIX2["report broken SVG"] --> DEV
+    V3 -->|fail| FIX3["report type error"] --> DEV
+    V4 -->|fail| FIX4["report lint error"] --> DEV
+    V5 -->|fail| FIX5["report failing test"] --> DEV
+    V6 -->|fail| FIX6["report build error"] --> DEV
+
+    V1 -->|pass| V2
+    V2 -->|pass| V3
+    V3 -->|pass| V4
+    V4 -->|pass| V5
+    V5 -->|pass| V6
+    V6 -->|pass| PUSH["push to main"]
+
+    PUSH --> GHA["GitHub Actions: ci.yml"]
+    GHA --> DEPLOY["Vercel: production build"]
+    DEPLOY --> LIVE["Live URL"]
+    LIVE --> SMOKE["bun run smoke<br/>asserts rendered HTML"]

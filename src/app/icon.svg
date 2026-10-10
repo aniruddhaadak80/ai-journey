@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0b16"/>
+      <stop offset="100%" stop-color="#050508"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="55%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="spark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#67e8f9"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="13.25" fill="none" stroke="url(#brand)" stroke-opacity="0.45" stroke-width="1.5"/>
+
+  <!-- neural path: the "journey" -->
+  <path d="M12 44 C 22 44, 24 26, 34 26 S 46 20, 54 18"
+        fill="none" stroke="url(#brand)" stroke-width="3.2"
+        stroke-linecap="round" opacity="0.95"/>
+
+  <!-- nodes -->
+  <circle cx="12" cy="44" r="3.6" fill="#22d3ee"/>
+  <circle cx="34" cy="26" r="4.4" fill="#a855f7"/>
+  <circle cx="54" cy="18" r="3.2" fill="#ec4899"/>
+
+  <!-- ascending spark -->
+  <path d="M41 9 l2.1 5.1 L48 16.2 l-4.9 2.1 L41 23.4 l-2.1 -5.1 L34 16.2 l4.9 -2.1 Z" fill="url(#spark)"/>
+</svg>

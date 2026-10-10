@@ -1,0 +1,201 @@
+/**
+ * Smoke-tests the running production server by asserting that each route
+ * actually renders real content in its server-rendered HTML.
+ *
+ * Guards against the classic failure mode where a page returns 200 but an
+ * expandable section is empty because a data reference is broken.
+ *
+ * Run with the prod server up:  bun run scripts/smoke.ts
+ */
+export {}; // mark as a module so top-level await is legal under TS
+
+const BASE = process.env.BASE_URL ?? "http://localhost:3000";
+
+type Check = { label: string; pass: boolean; detail: string };
+
+const checks: Check[] = [];
+function expect(label: string, haystack: string, needles: string[]) {
+  const missing = needles.filter((n) => !haystack.includes(n));
+  checks.push({
+    label,
+    pass: missing.length === 0,
+    detail: missing.length ? `missing: ${missing.join(", ")}` : `${needles.length} assertion(s) ok`,
+  });
+}
+
+async function get(path: string) {
+  const res = await fetch(`${BASE}${path}`);
+  const text = await res.text();
+  return { status: res.status, text, type: res.headers.get("content-type") ?? "" };
+}
+
+const results: { path: string; status: number; ok: boolean; note: string }[] = [];
+
+async function route(path: string, needles: string[], label: string) {
+  try {
+    const { status, text } = await get(path);
+    expect(label, text, needles);
+    results.push({ path, status, ok: status === 200, note: `${needles.length} content checks` });
+  } catch (e) {
+    checks.push({ label, pass: false, detail: `request failed: ${(e as Error).message}` });
+    results.push({ path, status: 0, ok: false, note: "request failed" });
+  }
+}
+
+// ── Home ───────────────────────────────────────────────────────
+await route(
+  "/",
+  [
+    "The Journey",
+    "to AI",
+    "Interactive Timeline",
+    "Knowledge Graph",
+    "Structured Course",
+    "Visual Flowcharts",
+    "Source Library",
+    "12 Eras",
+    // Derived from the data layer: must match the timeline era names exactly.
+    "First AI Winter",
+    "Second AI Winter",
+    "Turing",
+  ],
+  "home"
+);
+
+// ── Timeline ───────────────────────────────────────────────────
+await route(
+  "/timeline",
+  [
+    "The Dream",
+    "Birth of AI",
+    "Golden Age",
+    "The First AI Winter",
+    "Expert Systems",
+    "The Second AI Winter",
+    "Quiet Revolution",
+    "Deep Learning Explosion",
+    "Transformer Era",
+    "LLM &amp; Foundation Model Era",
+    "Agent &amp; Reasoning Era",
+    "Present &amp; Beyond",
+    "Simple",
+    "Deeper",
+    "Deepest",
+  ],
+  "timeline"
+);
+
+// ── Course ─────────────────────────────────────────────────────
+// Only SSR-visible content is asserted; chapter bodies render on click.
+await route(
+  "/course",
+  [
+    "What is Intelligence?",
+    "The Birth of AI",
+    "The Transformer Era",
+    "The Present &amp; Beyond",
+    "Progress",
+  ],
+  "course"
+);
+
+// ── Graph ──────────────────────────────────────────────────────
+// The heading is split across elements in SSR, so assert its parts.
+await route(
+  "/graph",
+  ["Knowledge Graph", "Legend", "Concept", "Person", "Drag to pan"],
+  "graph"
+);
+
+// ── Flowcharts ─────────────────────────────────────────────────
+await route(
+  "/flowcharts",
+  [
+    "How a Neural Network Learns",
+    "Transformer Architecture",
+    "RLHF Training Pipeline",
+    "AI Agent Loop",
+    "Diffusion Generation",
+    "RAG Pipeline",
+  ],
+  "flowcharts"
+);
+
+// ── Sources ────────────────────────────────────────────────────
+await route(
+  "/sources",
+  [
+    "Attention Is All You Need",
+    "Learning Representations by Back-Propagating Errors",
+    "Compute Machinery and Intelligence".replace("Compute", "Computing"),
+    "Search papers, videos, authors",
+  ],
+  "sources"
+);
+
+// ── SEO / skin assets ──────────────────────────────────────────
+{
+  const home = await get("/");
+  checks.push({
+    label: "seo: canonical + og + twitter on home",
+    pass:
+      home.text.includes('rel="canonical"') &&
+      home.text.includes('property="og:title"') &&
+      home.text.includes('name="twitter:card"') &&
+      home.text.includes('rel="icon"'),
+    detail: "metadata tags present",
+  });
+
+  const robots = await get("/robots.txt");
+  checks.push({
+    label: "robots.txt",
+    pass: robots.status === 200 && robots.text.includes("Sitemap:"),
+    detail: robots.text.trim().split("\n")[0],
+  });
+
+  const sitemap = await get("/sitemap.xml");
+  checks.push({
+    label: "sitemap.xml lists all 6 routes",
+    pass:
+      sitemap.status === 200 &&
+      ["/timeline", "/course", "/graph", "/flowcharts", "/sources"].every((p) =>
+        sitemap.text.includes(p)
+      ),
+    detail: `${(sitemap.text.match(/<url>/g) ?? []).length} urls`,
+  });
+
+  const og = await get("/opengraph-image");
+  checks.push({
+    label: "opengraph-image is a PNG",
+    pass: og.status === 200 && og.type.includes("image/png"),
+    detail: og.type,
+  });
+
+  const icon = await get("/icon.svg");
+  checks.push({
+    label: "icon.svg served as svg",
+    pass: icon.status === 200 && icon.text.includes("<svg"),
+    detail: icon.type,
+  });
+}
+
+// ── report ─────────────────────────────────────────────────────
+console.log("── route status ──");
+for (const r of results) {
+  console.log(`${r.ok ? "ok  " : "FAIL"} ${r.path.padEnd(14)} ${r.status}  (${r.note})`);
+}
+
+console.log("\n── content assertions ──");
+let failed = 0;
+for (const c of checks) {
+  if (!c.pass) failed++;
+  console.log(`${c.pass ? "ok  " : "FAIL"} ${c.label.padEnd(38)} ${c.detail}`);
+}
+
+console.log("");
+if (failed === 0) {
+  console.log(`OK — ${checks.length} assertions passed across ${results.length} routes.`);
+  process.exit(0);
+}
+console.log(`FAIL — ${failed}/${checks.length} assertions failed.`);
+process.exit(1);

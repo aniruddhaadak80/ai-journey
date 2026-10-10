@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" font-family="'Segoe UI', Inter, system-ui, sans-serif">
+  
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/><stop offset="52%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.03"/>
+    </pattern>
+    <radialGradient id="g1" cx="0.2" cy="0.15" r="0.7">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.16"/><stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="0.85" cy="0.9" r="0.7">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.16"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="#050508"/>
+  <rect width="1200" height="750" fill="url(#grid)"/>
+  <rect width="1200" height="750" fill="url(#g1)"/>
+  <rect width="1200" height="750" fill="url(#g2)"/>
+
+  <!-- top bar -->
+  <rect x="0" y="0" width="1200" height="56" fill="#08080f" fill-opacity="0.92"/>
+  <circle cx="30" cy="28" r="7" fill="#ef4444"/>
+  <circle cx="52" cy="28" r="7" fill="#f59e0b"/>
+  <circle cx="74" cy="28" r="7" fill="#22c55e"/>
+  <rect x="300" y="16" width="600" height="24" rx="12" fill="#ffffff" fill-opacity="0.05"/>
+  <text x="330" y="33" font-size="12" fill="rgba(255,255,255,0.35)">AI Journey — Home</text>
+
+  <!-- site nav -->
+  <rect x="0" y="56" width="1200" height="52" fill="#08080f" fill-opacity="0.7"/>
+  <rect x="28" y="70" width="22" height="22" rx="7" fill="url(#brand)"/>
+  <text x="60" y="87" font-size="15" font-weight="700" fill="#ffffff">AI Journey</text>
+  <text x="560" y="87" font-size="13" fill="rgba(255,255,255,0.4)">Timeline</text>
+  <text x="676" y="87" font-size="13" fill="rgba(255,255,255,0.4)">Graph</text>
+  <text x="792" y="87" font-size="13" fill="rgba(255,255,255,0.4)">Course</text>
+  <text x="908" y="87" font-size="13" fill="rgba(255,255,255,0.4)">Flowcharts</text>
+  <text x="1024" y="87" font-size="13" fill="rgba(255,255,255,0.4)">Sources</text>
+  <line x1="0" y1="108" x2="1200" y2="108" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  
+  <g>
+    <rect x="440" y="150" width="320" height="30" rx="15" fill="url(#brand)" fill-opacity="0.14" stroke="#22d3ee" stroke-opacity="0.3"/>
+    <text x="600" y="170" text-anchor="middle" font-size="12" fill="#67e8f9">The Complete Interactive History of AI</text>
+
+    <text x="600" y="268" text-anchor="middle" font-size="66" font-weight="800" fill="#ffffff" letter-spacing="-2">The Journey</text>
+    <text x="600" y="336" text-anchor="middle" font-size="66" font-weight="800" fill="url(#brand)" letter-spacing="-2">to AI</text>
+
+    <text x="600" y="384" text-anchor="middle" font-size="16" fill="rgba(255,255,255,0.45)">From Turing's dream in 1936 to autonomous agents in 2026</text>
+
+    <rect x="470" y="412" width="150" height="42" rx="12" fill="url(#brand)"/>
+    <text x="545" y="438" text-anchor="middle" font-size="14" font-weight="600" fill="#050508">Start the Journey</text>
+    <rect x="636" y="412" width="130" height="42" rx="12" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.15"/>
+    <text x="701" y="438" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.7)">Take the Course</text>
+
+    <!-- stats -->
+    <g transform="translate(150 502)"><rect x="0" y="0" width="132" height="74" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <text x="66" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">12</text>
+          <text x="66" y="56" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.4)">Eras</text></g>
+  <g transform="translate(302 502)"><rect x="0" y="0" width="132" height="74" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <text x="66" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">60</text>
+          <text x="66" y="56" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.4)">Concepts</text></g>
+  <g transform="translate(454 502)"><rect x="0" y="0" width="132" height="74" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <text x="66" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">96</text>
+          <text x="66" y="56" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.4)">Sources</text></g>
+  <g transform="translate(606 502)"><rect x="0" y="0" width="132" height="74" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <text x="66" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">6</text>
+          <text x="66" y="56" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.4)">Flowcharts</text></g>
+  <g transform="translate(758 502)"><rect x="0" y="0" width="132" height="74" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <text x="66" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">11</text>
+          <text x="66" y="56" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.4)">Chapters</text></g>
+  <g transform="translate(910 502)"><rect x="0" y="0" width="132" height="74" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <text x="66" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">90+</text>
+          <text x="66" y="56" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.4)">Years</text></g>
+
+    <!-- mode cards -->
+    <g transform="translate(150 604)"><rect x="0" y="0" width="300" height="68" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <rect x="16" y="18" width="32" height="32" rx="10" fill="url(#brand)" fill-opacity="0.25"/>
+          <text x="60" y="30" font-size="13" font-weight="600" fill="#ffffff">Timeline</text>
+          <rect x="60" y="42" width="200" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.1"/></g>
+  <g transform="translate(470 604)"><rect x="0" y="0" width="300" height="68" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <rect x="16" y="18" width="32" height="32" rx="10" fill="url(#brand)" fill-opacity="0.25"/>
+          <text x="60" y="30" font-size="13" font-weight="600" fill="#ffffff">Knowledge Graph</text>
+          <rect x="60" y="42" width="200" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.1"/></g>
+  <g transform="translate(790 604)"><rect x="0" y="0" width="300" height="68" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <rect x="16" y="18" width="32" height="32" rx="10" fill="url(#brand)" fill-opacity="0.25"/>
+          <text x="60" y="30" font-size="13" font-weight="600" fill="#ffffff">Structured Course</text>
+          <rect x="60" y="42" width="200" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.1"/></g>
+  <g transform="translate(150 688)"><rect x="0" y="0" width="300" height="68" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <rect x="16" y="18" width="32" height="32" rx="10" fill="url(#brand)" fill-opacity="0.25"/>
+          <text x="60" y="30" font-size="13" font-weight="600" fill="#ffffff">Visual Flowcharts</text>
+          <rect x="60" y="42" width="200" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.1"/></g>
+  <g transform="translate(470 688)"><rect x="0" y="0" width="300" height="68" rx="14" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.1"/>
+          <rect x="16" y="18" width="32" height="32" rx="10" fill="url(#brand)" fill-opacity="0.25"/>
+          <text x="60" y="30" font-size="13" font-weight="600" fill="#ffffff">Source Library</text>
+          <rect x="60" y="42" width="200" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.1"/></g>
+  </g>
+</svg>

@@ -1,0 +1,66 @@
+classDiagram
+    class ContentData {
+        +eras: Era[]
+        +concepts: Concept[]
+        +sources: Source[]
+        +chapters: Chapter[]
+        +flowcharts: Flowchart[]
+        +graphNodes: GraphNode[]
+        +graphEdges: GraphEdge[]
+        +getEra(id) Era?
+        +getConcept(id) Concept?
+        +getSource(id) Source?
+        +getConceptsForEra(id) Concept[]
+        +getSourcesForEra(id) Source[]
+        +searchAll(q) SearchResult
+    }
+
+    class Era {
+        +string id
+        +int index
+        +string name
+        +string years
+        +string color
+        +string tagline
+        +string summary
+        +string[] concepts
+        +Milestone[] milestones
+    }
+
+    class Concept {
+        +string id
+        +string era
+        +string name
+        +string tagline
+        +string simple
+        +string deeper
+        +string deepest
+        +int year
+        +string[] sources
+        +string[] tags
+    }
+
+    class Source {
+        +string id
+        +string kind
+        +string title
+        +string author
+        +int year
+        +string url
+        +string description
+        +string era
+    }
+
+    class FilterSources {
+        <<module>>
+        +filterSources(all, filters) Source[]
+        +countByKind(all) Record
+        +distinctKinds(all) string[]
+    }
+
+    ContentData --> Era
+    ContentData --> Concept
+    ContentData --> Source
+    Concept --> Source : cites
+    Era --> Concept : lists
+    FilterSources ..> Source : filters

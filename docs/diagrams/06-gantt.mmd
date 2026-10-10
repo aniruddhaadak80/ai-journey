@@ -1,0 +1,30 @@
+gantt
+    title AI Journey — build and release
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+
+    section Scaffold
+    Next.js 16 app + Tailwind 4 + Bun      :done, s1, 2026-10-09, 1d
+    Design system + routing shell         :done, s2, after s1, 1d
+
+    section Content
+    Era + concept dataset (3 depths)       :done, c1, after s2, 2d
+    Source library curation               :done, c2, after c1, 1d
+    Graph nodes and edges                 :done, c3, after c2, 1d
+
+    section Features
+    Timeline route                        :done, f1, after c3, 1d
+    Knowledge graph route                 :done, f2, after f1, 1d
+    Course route                          :done, f3, after f2, 1d
+    Flowcharts route                      :done, f4, after f3, 1d
+    Sources route                         :done, f5, after f4, 1d
+
+    section Quality
+    Integrity validator (dangling FKs)    :done, q1, after f5, 1d
+    Unit tests + SVG validator            :done, q2, after q1, 1d
+    Lint + typecheck clean                :done, q3, after q2, 1d
+
+    section Release
+    Brand assets + OG image               :done, r1, after q3, 1d
+    README + diagrams                     :done, r2, after r1, 1d
+    GitHub publish + Vercel deploy        :active, r3, after r2, 1d

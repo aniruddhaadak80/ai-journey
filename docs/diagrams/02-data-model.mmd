@@ -1,0 +1,68 @@
+erDiagram
+    ERA ||--o{ CONCEPT : "contains via id list"
+    ERA ||--o{ MILESTONE : "has"
+    CONCEPT }o--|| ERA : "belongs to"
+    CONCEPT }o--o{ SOURCE : "cites (sourceIds)"
+    CHAPTER }o--|| ERA : "sits in"
+    CHAPTER }o--o{ CONCEPT : "teaches (conceptIds)"
+    CHAPTER }o--o{ SOURCE : "assigns (sourceIds)"
+    SOURCE }o--|| ERA : "tagged with"
+    GRAPHNODE }o--o{ GRAPHEDGE : "source / target"
+    FLOWCHART ||--o{ FLOWNODE : "composes"
+    FLOWNODE ||--o{ FLOWEDGE : "from / to"
+
+    ERA {
+        string id PK
+        int index
+        string name
+        string years
+        int yearStart
+        string color
+        string tagline
+        string summary
+        string icon
+        string[] concepts "FK refs"
+    }
+
+    CONCEPT {
+        string id PK
+        string era FK
+        string name
+        string tagline
+        text simple
+        text deeper
+        text deepest
+        int year
+        string[] sources "FK refs"
+        string[] tags
+    }
+
+    SOURCE {
+        string id PK
+        string kind "paper|video|blog|essay|article|book|talk|code"
+        string title
+        string author
+        int year
+        string url
+        string description
+        string era FK
+    }
+
+    CHAPTER {
+        string id PK
+        int index
+        string title
+        string subtitle
+        string era FK
+        string[] conceptIds "FK refs"
+        string[] sources "FK refs"
+        string duration
+        string level
+    }
+
+    MILESTONE {
+        int year
+        string title
+        string description
+        string[] sourceIds "FK refs"
+    }

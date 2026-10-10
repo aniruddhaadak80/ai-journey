@@ -1,0 +1,30 @@
+sequenceDiagram
+    autonumber
+    participant U as Visitor
+    participant P as /timeline (client)
+    participant D as data/content.ts
+    participant I as Integrity validator
+    participant C as CI
+
+    Note over D: 60 concepts × 3 depths, 96 sources, 12 eras
+    U->>P: opens /timeline
+    P->>D: reads eras[]
+    D-->>P: 12 Era records
+    P-->>U: SSR — all 12 era cards
+
+    U->>P: expands an era
+    P->>D: getConceptsForEra(era.id)
+    D-->>P: Concept[] for that era
+    P-->>U: milestones + concepts + sources
+
+    U->>P: switches depth Simple → Deepest
+    P->>P: local state only (no refetch)
+    P-->>U: re-renders concept.deepest
+
+    Note over I,C: ── offline, on every commit ──
+    I->>D: validate every FK reference
+    alt any dangling id
+        I-->>C: non-zero exit + report
+    else all references resolve
+        I-->>C: OK — no integrity problems
+    end

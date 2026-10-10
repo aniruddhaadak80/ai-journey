@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="52%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="60%" stop-color="#ec4899"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.18" cy="0.2" r="0.6">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.85" cy="0.85" r="0.6">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.035"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="640" fill="#050508"/>
+  <rect width="1280" height="640" fill="url(#glow1)"/>
+  <rect width="1280" height="640" fill="url(#glow2)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+
+  
+  <g transform="translate(84 96) scale(1.7)">
+    <path d="M0 34 C 10 34, 12 16, 22 16 S 34 10, 42 6"
+          fill="none" stroke="url(#brand)" stroke-width="4.2" stroke-linecap="round"/>
+    <circle cx="0" cy="34" r="4.4" fill="#22d3ee"/>
+    <circle cx="22" cy="16" r="5.4" fill="#a855f7"/>
+    <circle cx="42" cy="6" r="4" fill="#ec4899"/>
+    <path d="M30 0 l2.4 6 L38 8.4 l-5.6 2.4 L30 16.8 l-2.4 -6 L22 8.4 l5.6 -2.4 Z" fill="#c4b5fd"/>
+  </g>
+  
+  <g transform="translate(210 104)" font-family="'Segoe UI', Inter, system-ui, sans-serif">
+    <text y="44" font-size="44" font-weight="700" fill="#ffffff" letter-spacing="-0.5">AI Journey</text>
+    <text y="70" font-size="20" fill="rgba(255,255,255,0.5)">The complete interactive history of AI</text>
+  </g>
+
+  <text x="80" y="290" font-family="'Segoe UI', Inter, sans-serif" font-size="76" font-weight="800" fill="#ffffff" letter-spacing="-2.5">From Turing's question to</text>
+  <text x="80" y="368" font-family="'Segoe UI', Inter, sans-serif" font-size="76" font-weight="800" fill="url(#brand)" letter-spacing="-2.5">autonomous agents.</text>
+
+  <g transform="translate(80 500)">
+      <rect width="206" height="88" rx="18" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="26" y="48" font-family="'Segoe UI', Inter, sans-serif" font-size="36" font-weight="800" fill="#22d3ee">12</text>
+      <text x="26" y="72" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.55)">Eras</text>
+    </g>
+  <g transform="translate(308 500)">
+      <rect width="206" height="88" rx="18" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="26" y="48" font-family="'Segoe UI', Inter, sans-serif" font-size="36" font-weight="800" fill="#22d3ee">60</text>
+      <text x="26" y="72" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.55)">Concepts</text>
+    </g>
+  <g transform="translate(536 500)">
+      <rect width="206" height="88" rx="18" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="26" y="48" font-family="'Segoe UI', Inter, sans-serif" font-size="36" font-weight="800" fill="#22d3ee">96</text>
+      <text x="26" y="72" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.55)">Sources</text>
+    </g>
+  <g transform="translate(764 500)">
+      <rect width="206" height="88" rx="18" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="26" y="48" font-family="'Segoe UI', Inter, sans-serif" font-size="36" font-weight="800" fill="#22d3ee">11</text>
+      <text x="26" y="72" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.55)">Chapters</text>
+    </g>
+  <g transform="translate(992 500)">
+      <rect width="206" height="88" rx="18" fill="#ffffff" fill-opacity="0.045" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="26" y="48" font-family="'Segoe UI', Inter, sans-serif" font-size="36" font-weight="800" fill="#22d3ee">6</text>
+      <text x="26" y="72" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.55)">Flowcharts</text>
+    </g>
+  <g transform="translate(80 400)">
+      <rect width="134.5" height="42" rx="21" fill="#8b5cf6" fill-opacity="0.12" stroke="#8b5cf6" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#8b5cf6"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">The Dream</text>
+    </g>
+  <g transform="translate(372 400)">
+      <rect width="92.5" height="42" rx="21" fill="#6366f1" fill-opacity="0.12" stroke="#6366f1" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#6366f1"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Birth</text>
+    </g>
+  <g transform="translate(664 400)">
+      <rect width="145" height="42" rx="21" fill="#3b82f6" fill-opacity="0.12" stroke="#3b82f6" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#3b82f6"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Golden Age</text>
+    </g>
+  <g transform="translate(956 400)">
+      <rect width="145" height="42" rx="21" fill="#64748b" fill-opacity="0.12" stroke="#64748b" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#64748b"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">AI Winters</text>
+    </g>
+  <g transform="translate(80 462)">
+      <rect width="187" height="42" rx="21" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#10b981"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Expert Systems</text>
+    </g>
+  <g transform="translate(372 462)">
+      <rect width="208" height="42" rx="21" fill="#f59e0b" fill-opacity="0.12" stroke="#f59e0b" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#f59e0b"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Quiet Revolution</text>
+    </g>
+  <g transform="translate(664 462)">
+      <rect width="176.5" height="42" rx="21" fill="#ef4444" fill-opacity="0.12" stroke="#ef4444" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#ef4444"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Deep Learning</text>
+    </g>
+  <g transform="translate(956 462)">
+      <rect width="155.5" height="42" rx="21" fill="#ec4899" fill-opacity="0.12" stroke="#ec4899" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#ec4899"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Transformer</text>
+    </g>
+  <g transform="translate(80 524)">
+      <rect width="113.5" height="42" rx="21" fill="#a855f7" fill-opacity="0.12" stroke="#a855f7" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#a855f7"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">LLM Era</text>
+    </g>
+  <g transform="translate(372 524)">
+      <rect width="134.5" height="42" rx="21" fill="#06b6d4" fill-opacity="0.12" stroke="#06b6d4" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#06b6d4"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Agent Era</text>
+    </g>
+  <g transform="translate(664 524)">
+      <rect width="208" height="42" rx="21" fill="#22d3ee" fill-opacity="0.12" stroke="#22d3ee" stroke-opacity="0.4"/>
+      <circle cx="24" cy="21" r="5" fill="#22d3ee"/>
+      <text x="40" y="26" font-family="'Segoe UI', Inter, sans-serif" font-size="15" fill="rgba(255,255,255,0.75)">Present & Beyond</text>
+    </g>
+</svg>

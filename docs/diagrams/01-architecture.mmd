@@ -1,0 +1,63 @@
+flowchart TB
+    subgraph Data["src/data/content.ts — single source of truth"]
+        ERA["eras[]<br/>12 eras, 1936 → 2026+"]
+        CON["concepts[]<br/>60 concepts × 3 depths"]
+        SRC["sources[]<br/>96 papers/videos/blogs"]
+        CH["chapters[]<br/>11 course chapters"]
+        FC["flowcharts[]<br/>6 process diagrams"]
+        GN["graphNodes / graphEdges<br/>53 nodes, 50 edges"]
+        HL["helpers<br/>getEra · getConcept ·<br/>getSourcesForEra · searchAll"]
+    end
+
+    subgraph Routes["App Router routes (all statically prerendered)"]
+        HOME["/"]
+        TL["/timeline"]
+        GR["/graph"]
+        CO["/course"]
+        FL["/flowcharts"]
+        SO["/sources"]
+    end
+
+    subgraph UI["components/"]
+        NAV["Navbar<br/>route-aware active state"]
+        FOOT["Footer<br/>cross-links + GitHub"]
+    end
+
+    subgraph SEO["Metadata & assets"]
+        MD["layout.tsx<br/>metadataBase · OG · Twitter"]
+        OGI["opengraph-image.tsx<br/>next/og ImageResponse"]
+        ICON["icon.svg"]
+        SM["sitemap.ts · robots.ts"]
+    end
+
+    ERA --> TL
+    ERA --> HOME
+    CON --> TL
+    CON --> CO
+    CON --> GN
+    SRC --> TL
+    SRC --> CO
+    SRC --> SO
+    CH --> CO
+    FC --> FL
+    GN --> GR
+    HL --> TL
+    HL --> CO
+    HL --> SO
+
+    NAV --> HOME
+    NAV --> TL
+    NAV --> GR
+    NAV --> CO
+    NAV --> FL
+    NAV --> SO
+    FOOT --> TL
+    FOOT --> GR
+    FOOT --> CO
+    FOOT --> FL
+    FOOT --> SO
+
+    MD --> HOME
+    OGI --> HOME
+    ICON --> HOME
+    SM --> HOME

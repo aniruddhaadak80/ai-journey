@@ -1,0 +1,30 @@
+flowchart LR
+    subgraph Clients
+        GH["GitHub Pages<br/>README images"]
+        SO["Social / X / LinkedIn<br/>OG card"]
+        BROWSER["Browser<br/>static HTML"]
+    end
+
+    subgraph Edge
+        VERCEL["Vercel Edge Network<br/>CDN + static cache"]
+    end
+
+    subgraph NextRuntime["Next.js 16 runtime"]
+        STATIC["Static prerender<br/>/ · /timeline · /graph<br/>/course · /flowcharts · /sources"]
+        DYN["Dynamic<br/>/sitemap.xml<br/>/opengraph-image"]
+    end
+
+    subgraph Assets
+        SVG["/icon.svg"]
+        OG["opengraph-image PNG"]
+        BOT["/robots.txt"]
+    end
+
+    GH --> VERCEL
+    SO --> OG
+    BROWSER --> VERCEL
+    VERCEL --> STATIC
+    VERCEL --> DYN
+    STATIC --> SVG
+    STATIC --> OG
+    DYN --> BOT
