@@ -235,7 +235,7 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-              Five Ways to <span className="gradient-text">Explore</span>
+              Seven Ways to <span className="gradient-text">Explore</span>
             </h2>
             <p className="text-white/40 max-w-xl mx-auto">
               Each mode is a different lens on the same story. Combine them for the full picture.

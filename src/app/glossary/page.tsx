@@ -114,7 +114,7 @@ export default function GlossaryPage() {
                         level === l ? "active" : "text-white/40 hover:text-white/60"
                       }`}
                     >
-                      {l}
+                      {l === "simple" ? "Simple" : l === "deeper" ? "Deeper" : "Deepest"}
                     </button>
                   ))}
                 </div>

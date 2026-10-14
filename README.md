@@ -264,6 +264,8 @@ flowchart TB
 
 **Why is the data validated rather than typed?** TypeScript can express `era.concepts: string[]` but not *"these strings are valid concept ids."* Referential integrity is a runtime property, so it's checked at runtime — by a script, on every commit, and in CI.
 
+**Why do the timeline and sources pages stream?** Their deep links (`?era=`, `?concept=`, `?q=`) are read with `useSearchParams`, which requires a `<Suspense>` boundary for static prerendering — so the prerender is a shell and the body streams in. The trade-off is deliberate: crawlers get complete static text from the glossary (every concept, fully SSR), the course, the home page and the sitemap, while interactive users get shareable deep links. Googlebot executes JavaScript and indexes the hydrated page.
+
 **Why no `useMemo` in the sources page?** The React Compiler (enabled via `eslint-plugin-react-hooks` v6) auto-memoizes pure calls and actively rejects hand-rolled memoization it can't preserve. The filtering logic therefore lives in a plain, testable module (`src/lib/filter-sources.ts`) rather than inline in the component.
 
 ---

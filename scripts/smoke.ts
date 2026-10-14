@@ -63,24 +63,15 @@ await route(
 );
 
 // ── Timeline ───────────────────────────────────────────────────
+// The interactive body streams inside Suspense (deep links need
+// useSearchParams), so the prerender is a shell: brand, metadata, the
+// streaming boundary. Full text lives in the glossary + course instead.
 await route(
   "/timeline",
   [
-    "The Dream",
-    "Birth of AI",
-    "Golden Age",
-    "The First AI Winter",
-    "Expert Systems",
-    "The Second AI Winter",
-    "Quiet Revolution",
-    "Deep Learning Explosion",
-    "Transformer Era",
-    "LLM &amp; Foundation Model Era",
-    "Agent &amp; Reasoning Era",
-    "Present &amp; Beyond",
-    "Simple",
-    "Deeper",
-    "Deepest",
+    "AI Journey", // navbar brand in the shell
+    'property="og:title"',
+    "<template", // Suspense streaming boundary marker
   ],
   "timeline"
 );
@@ -122,14 +113,10 @@ await route(
 );
 
 // ── Sources ────────────────────────────────────────────────────
+// Same streaming architecture as the timeline (?q= seeds the search box).
 await route(
   "/sources",
-  [
-    "Attention Is All You Need",
-    "Learning Representations by Back-Propagating Errors",
-    "Compute Machinery and Intelligence".replace("Compute", "Computing"),
-    "Search papers, videos, authors",
-  ],
+  ["AI Journey", 'property="og:title"', "<template"],
   "sources"
 );
 

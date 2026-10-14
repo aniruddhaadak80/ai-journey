@@ -68,9 +68,24 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  // One palette instance for the whole navbar — shared by the desktop and
+  // mobile triggers so ⌘K can never open two dialogs at once.
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
 
   useDismiss(moreRef, moreOpen, () => setMoreOpen(false));
+
+  // The single global ⌘K / Ctrl-K binding for the site chrome.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setPaletteOpen(true);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const moreActive = moreNav.some((m) => m.href === pathname);
 
@@ -109,7 +124,7 @@ export default function Navbar() {
 
             {/* Search */}
             <div className="ml-1.5 mr-0.5">
-              <CommandPaletteTrigger />
+              <SearchTrigger onOpen={() => setPaletteOpen(true)} />
             </div>
 
             {/* More */}
@@ -179,7 +194,7 @@ export default function Navbar() {
 
           {/* Mobile: search + toggle */}
           <div className="flex md:hidden items-center gap-1">
-            <CommandPaletteTrigger compact />
+            <SearchTrigger compact onOpen={() => setPaletteOpen(true)} />
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -233,47 +248,35 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* The single shared palette for the whole navbar. */}
+      <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
     </nav>
   );
 }
 
 /**
- * Thin wrapper so the palette (which owns its own trigger UI) can be mounted
- * twice — desktop full, mobile icon-only — without duplicating state.
+ * A stateless trigger button — all open state lives in Navbar so the desktop
+ * and mobile triggers can never open two dialogs at once.
  */
-function CommandPaletteTrigger({ compact = false }: { compact?: boolean }) {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        setOpen(true);
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
+function SearchTrigger({ compact = false, onOpen }: { compact?: boolean; onOpen: () => void }) {
   return (
-    <>
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Search AI Journey"
-        className={`flex items-center gap-1.5 rounded-lg glass text-white/40 hover:text-white/70 hover:border-white/20 transition-all ${
-          compact ? "p-2" : "px-2.5 py-1.5 text-xs"
-        }`}
-      >
-        <Search className="w-3.5 h-3.5" />
-        {!compact && (
-          <>
-            <span>Search</span>
-            <kbd className="hidden lg:inline-flex items-center px-1 rounded bg-white/10 text-[10px] font-mono text-white/40">
-              ⌘K
-            </kbd>
-          </>
-        )}
-      </button>
-      <CommandPalette open={open} onOpenChange={setOpen} />
-    </>
+    <button
+      onClick={onOpen}
+      aria-label="Search AI Journey"
+      className={`flex items-center gap-1.5 rounded-lg glass text-white/40 hover:text-white/70 hover:border-white/20 transition-all ${
+        compact ? "p-2" : "px-2.5 py-1.5 text-xs"
+      }`}
+    >
+      <Search className="w-3.5 h-3.5" />
+      {!compact && (
+        <>
+          <span>Search</span>
+          <kbd className="hidden lg:inline-flex items-center px-1 rounded bg-white/10 text-[10px] font-mono text-white/40">
+            ⌘K
+          </kbd>
+        </>
+      )}
+    </button>
   );
 }
