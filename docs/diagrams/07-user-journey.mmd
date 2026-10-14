@@ -2,23 +2,30 @@ flowchart LR
     subgraph Read["Read the story"]
         A1[Timeline]
         A2[Course]
+        A3[People]
     end
     subgraph Explore["Explore the connections"]
         B1[Knowledge Graph]
         B2[Flowcharts]
     end
-    subgraph Deeper["Go to the primary sources"]
+    subgraph Lookup["Look it up"]
+        C0[Search - Cmd K]
         C1[Source Library]
+        C2[Glossary]
     end
 
     A1 --> C1
     A2 --> C1
     B1 --> C1
     B2 --> C1
+    C0 --> A1
+    C0 --> C1
+    A3 --> A1
     A1 -.deeper view.-> B1
     A2 -.structural view.-> A1
     B2 -.mechanism view.-> A2
+    C2 -.definition.-> A1
 
     style Read fill:#1e1b4b,stroke:#8b5cf6
     style Explore fill:#0c4a6e,stroke:#22d3ee
-    style C1 fill:#14532d,stroke:#10b981
+    style Lookup fill:#14532d,stroke:#10b981

@@ -47,7 +47,7 @@
 
 **AI Journey** is a single, self-contained website that teaches the *whole* history of AI — and makes every claim traceable to its primary source.
 
-Most AI "learning" sites pick one lens: a blog post, a video series, a textbook chapter. This one ships **five lenses over the same dataset**, so you can move between them without losing your place:
+Most AI "learning" sites pick one lens: a blog post, a video series, a textbook chapter. This one ships **seven lenses over the same dataset**, so you can move between them without losing your place:
 
 | | Lens | Question it answers |
 |---|---|---|
@@ -55,7 +55,11 @@ Most AI "learning" sites pick one lens: a blog post, a video series, a textbook 
 | 🕸️ | **Knowledge Graph** | *How do these ideas connect to each other?* |
 | 📚 | **Course** | *What should I learn, in what order, and how deep?* |
 | 🔀 | **Flowcharts** | *How does this machinery actually work?* |
+| 📖 | **Glossary** | *What does this term mean — quickly, at my level?* |
+| 🧑‍🔬 | **People** | *Who settled this, and where did they say it?* |
 | 🔗 | **Source Library** | *Where does this claim actually come from?* |
+
+Everything is reachable from anywhere: press **⌘K** anywhere for the command palette, or follow a deep link like `/timeline?concept=transformer` — every page renders from the same dataset.
 
 **Every concept is written at three depths**, so the same page serves a curious beginner and a practitioner reading about kernel launch configurations:
 
@@ -71,6 +75,7 @@ Most AI "learning" sites pick one lens: a blog post, a video series, a textbook 
 | Eras of AI history | **12** (1936 → 2026+) |
 | Concepts, each × 3 depth levels | **60** |
 | Sources (papers, videos, blogs, essays, talks, books) | **96** |
+| People — researchers with contributions + links | **12** |
 | Course chapters | **11** |
 | Interactive flowcharts | **6** |
 | Knowledge graph nodes / labelled edges | **53** / **50** |
@@ -97,6 +102,8 @@ Most AI "learning" sites pick one lens: a blog post, a video series, a textbook 
 |---|---|
 | ![Home](docs/images/screen-home.svg) | ![Sources](docs/images/screen-sources.svg) |
 
+> Mockups for the Glossary and People routes ship next alongside their routes.
+
 ---
 
 ## 🧭 Capabilities
@@ -122,6 +129,18 @@ Six pannable, zoomable process diagrams: neural-network training loop, Transform
 ### 🔗 Source Library — *when you want the receipts*
 
 All 96 sources in one filterable list. Filter by kind (paper / video / blog / essay / article / book / talk) and by era, sort by year or title, full-text search across titles, authors and descriptions. Every entry links out to the real thing.
+
+### ⌨️ Command palette — *when you know what you want*
+
+Press **⌘K** (or Ctrl-K) anywhere. One ranked index over all 60 concepts, 96 sources and 12 eras — type a few letters and jump straight to a deep link. Arrow keys navigate, Enter opens, your five most recent jumps persist across visits (locally, in your browser, nothing uploaded).
+
+### 📖 Glossary — *when you want a definition fast*
+
+All 60 terms A–Z with a sticky letter rail for jumping. Each expands at your chosen depth, shows the era and year, and links its sources plus a one-tap *"Open in the timeline"* route into the full story.
+
+### 🧑‍🔬 People — *when you want to know who did this*
+
+Twelve researchers, from Turing to Karpathy: what each actually contributed (itemised, not vague), which era they belong to, which concepts trace to them, and — where one exists — a link to hear it from them directly.
 
 ---
 
@@ -160,7 +179,7 @@ Open <http://localhost:3000>.
 
 How a visitor is meant to actually use this — the intended loop, not just the nav:
 
-1. **Orient** — start on the Timeline. Scan the 12 era chips and see the shape of the field.
+1. **Orient** — start on the Timeline. Scan the 12 era chips and see the shape of the field. Or press **⌘K** to jump straight to anything by name.
 2. **Go deeper** — expand an era that looks interesting; switch to **Deeper**, then **Deepest**, as your appetite grows.
 3. **Re-sequence it** — jump to the Course and follow the dependency-ordered path instead. Same concepts, ordered by prerequisite rather than by date.
 4. **See the mechanism** — for anything that felt hand-wavy, open a Flowchart and watch the actual loop (training, attention, RLHF, tool use).
@@ -188,15 +207,18 @@ flowchart TB
 
     subgraph Routes["App Router routes (all statically prerendered)"]
         HOME["/"]
-        TL["/timeline"]
+        TL["/timeline<br/>deep links: ?era= ?concept="]
         GR["/graph"]
         CO["/course"]
         FL["/flowcharts"]
-        SO["/sources"]
+        GL["/glossary"]
+        PE["/people"]
+        SO["/sources<br/>?q= seeds search"]
     end
 
     subgraph UI["components/"]
-        NAV["Navbar<br/>route-aware active state"]
+        NAV["Navbar<br/>route-aware + More menu"]
+        CMD["CommandPalette<br/>⌘K ranked search"]
         FOOT["Footer<br/>cross-links + GitHub"]
     end
 
@@ -220,11 +242,17 @@ flowchart TB
     NAV --> GR
     NAV --> CO
     NAV --> FL
+    NAV --> GL
+    NAV --> PE
     NAV --> SO
+    CMD --> TL
+    CMD --> SO
     FOOT --> TL
     FOOT --> GR
     FOOT --> CO
     FOOT --> FL
+    FOOT --> GL
+    FOOT --> PE
     FOOT --> SO
 ```
 
@@ -601,16 +629,19 @@ ai-journey/
 │   ├── app/
 │   │   ├── layout.tsx       # metadata, fonts, OG/Twitter cards
 │   │   ├── page.tsx         # /
-│   │   ├── timeline/        # /timeline
+│   │   ├── timeline/        # /timeline     (deep links: ?era=, ?concept=)
 │   │   ├── graph/           # /graph        (canvas graph)
 │   │   ├── course/          # /course
 │   │   ├── flowcharts/      # /flowcharts   (SVG process diagrams)
-│   │   ├── sources/         # /sources      (search + filters)
+│   │   ├── glossary/        # /glossary     (terms A–Z)
+│   │   ├── people/          # /people       (researchers)
+│   │   ├── sources/         # /sources      (search + filters, ?q= seeds search)
+│   │   ├── not-found.tsx    # custom 404
 │   │   ├── opengraph-image.tsx  # dynamic OG PNG via next/og
-│   │   ├── icon.svg · sitemap.ts · robots.ts
-│   ├── components/          # Navbar · Footer
+│   │   ├── manifest.ts · icon.svg · sitemap.ts · robots.ts
+│   ├── components/          # Navbar (with ⌘K CommandPalette) · Footer
 │   ├── data/content.ts      # the entire dataset + typed helpers
-│   └── lib/                 # site.ts · filter-sources.ts
+│   └── lib/                 # site.ts · filter-sources.ts · search.ts · use-recent.ts
 └── tests/                   # Bun test suites
 ```
 
@@ -623,7 +654,7 @@ ai-journey/
 | ![Mindmap](docs/images/screen-home.svg) | [`08-mindmap.mmd`](docs/diagrams/08-mindmap.mmd) — every route's scope |
 | [`05-gitgraph.mmd`](docs/diagrams/05-gitgraph.mmd) | Contribution branch flow |
 | [`06-gantt.mmd`](docs/diagrams/06-gantt.mmd) | Build timeline |
-| [`07-user-journey.mmd`](docs/diagrams/07-user-journey.mmd) | How the five lenses connect |
+| [`07-user-journey.mmd`](docs/diagrams/07-user-journey.mmd) | How the seven lenses connect |
 | [`09-class.mmd`](docs/diagrams/09-class.mmd) | Data classes and helpers |
 | [`12-infrastructure.mmd`](docs/diagrams/12-infrastructure.mmd) | CDN → static → assets |
 

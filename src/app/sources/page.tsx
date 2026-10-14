@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import {
   Search,
@@ -33,7 +34,19 @@ const kindIcons: Record<string, LucideIcon> = {
 };
 
 export default function SourcesPage() {
-  const [search, setSearch] = useState("");
+  // Same static-prerender rule as the timeline: the `q` deep link reads via
+  // useSearchParams, so the interactive body streams inside Suspense.
+  return (
+    <Suspense>
+      <SourcesBody />
+    </Suspense>
+  );
+}
+
+function SourcesBody() {
+  const params = useSearchParams();
+  // A shared link like /sources?q=attention seeds the search box.
+  const [search, setSearch] = useState(() => params.get("q") ?? "");
   const [kindFilter, setKindFilter] = useState<string>("all");
   const [eraFilter, setEraFilter] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"year" | "title">("year");

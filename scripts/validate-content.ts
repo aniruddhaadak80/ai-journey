@@ -13,6 +13,7 @@
 import {
   eras,
   concepts,
+  people,
   sources,
   chapters,
   flowcharts,
@@ -114,6 +115,28 @@ for (const fc of flowcharts) {
   }
 }
 
+// ── people ─────────────────────────────────────────────────────
+const personIds = new Set(people.map((p) => p.id));
+{
+  const seen = new Set<string>();
+  for (const p of people) {
+    if (seen.has(p.id)) add("duplicate-id", `person: "${p.id}"`);
+    seen.add(p.id);
+    if (!eraIds.has(p.era)) add("person->era", `person "${p.id}" -> missing era "${p.era}"`);
+    for (const cid of p.conceptIds) {
+      if (!conceptIds.has(cid))
+        add("person->concept", `person "${p.id}" -> missing concept "${cid}"`);
+    }
+    if (!p.contributions.length) add("person-empty", `person "${p.id}" has no contributions`);
+    if (!p.summary?.trim()) add("person-field", `person "${p.id}" has no summary`);
+    if (p.link && !/^https:\/\//.test(p.link))
+      add("person-link", `person "${p.id}" has non-https link`);
+    if (p.weight < 1 || p.weight > 5)
+      add("person-field", `person "${p.id}" weight out of range 1-5`);
+  }
+}
+void personIds;
+
 // ── reachability: every concept must be reachable from some era ─
 const reachable = new Set(eras.flatMap((e) => e.concepts));
 for (const c of concepts) {
@@ -126,6 +149,7 @@ const videos = sources.filter((s) => s.kind === "video" || s.kind === "talk").le
 console.log("── content inventory ──");
 console.log(`eras          ${eras.length}`);
 console.log(`concepts      ${concepts.length}`);
+console.log(`people        ${people.length}`);
 console.log(`sources       ${sources.length}  (${videos} video/talk)`);
 console.log(`chapters      ${chapters.length}`);
 console.log(`flowcharts    ${flowcharts.length}`);

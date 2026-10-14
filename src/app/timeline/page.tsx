@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { Suspense, useState } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
+import { useSearchParams } from "next/navigation";
 import {
   Sparkles,
   Baby,
@@ -28,7 +29,14 @@ import {
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { LucideIcon } from "lucide-react";
-import { eras, getConceptsForEra, getSourcesForEra, type Level, sourceKindColors } from "@/data/content";
+import {
+  eras,
+  concepts,
+  getConceptsForEra,
+  getSourcesForEra,
+  type Level,
+  sourceKindColors,
+} from "@/data/content";
 
 const eraIcons: Record<string, LucideIcon> = {
   dream: Sparkles,
@@ -58,14 +66,53 @@ const kindIcons: Record<string, LucideIcon> = {
 
 const levelOrder: Level[] = ["simple", "deeper", "deepest"];
 
+/** Thin gradient bar at the very top showing how far down the page you are. */
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const width = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+
+  return (
+    <motion.div
+      style={{ scaleX: width }}
+      className="fixed top-16 left-0 right-0 h-0.5 origin-left z-40 bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500"
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function TimelinePage() {
-  const [expandedEra, setExpandedEra] = useState<string | null>(null);
+  // The deep-link hook (useSearchParams) requires a Suspense boundary for
+  // static prerendering, so the interactive body streams in after the shell.
+  return (
+    <Suspense>
+      <TimelineBody />
+    </Suspense>
+  );
+}
+
+function TimelineBody() {
+  const params = useSearchParams();
+
+  // Deep links are seeded from the URL in the state initialiser rather than in
+  // an effect — reading params during render avoids a cascading second render,
+  // and `useSearchParams` is already available synchronously here.
+  const [expandedEra, setExpandedEra] = useState<string | null>(() => {
+    const conceptId = params.get("concept");
+    if (conceptId) {
+      const owner = concepts.find((c) => c.id === conceptId)?.era;
+      if (owner) return owner;
+    }
+    return params.get("era");
+  });
   const [level, setLevel] = useState<Level>("simple");
-  const [expandedConcept, setExpandedConcept] = useState<string | null>(null);
+  const [expandedConcept, setExpandedConcept] = useState<string | null>(
+    () => params.get("concept") ?? null
+  );
 
   return (
     <div className="min-h-screen bg-grid noise pt-16">
       <Navbar />
+      <ScrollProgress />
 
       {/* Header */}
       <section className="py-20 border-b border-white/5">

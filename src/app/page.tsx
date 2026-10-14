@@ -12,8 +12,9 @@ import {
   Sparkles,
   Zap,
   Brain,
-  Rocket,
   ChevronDown,
+  BookMarked,
+  Users,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -65,6 +66,24 @@ const modes = [
     color: "from-emerald-400 to-green-500",
     glow: "",
   },
+  {
+    href: "/glossary",
+    icon: BookMarked,
+    title: "Glossary",
+    description:
+      "All 60 terms A–Z, expandable at the depth you want. Start here if you arrived looking up one word.",
+    color: "from-sky-400 to-blue-500",
+    glow: "",
+  },
+  {
+    href: "/people",
+    icon: Users,
+    title: "People",
+    description:
+      "Twelve researchers, what each actually contributed, and where to hear it from them directly.",
+    color: "from-orange-400 to-amber-500",
+    glow: "",
+  },
 ];
 
 const stats = [
@@ -73,7 +92,7 @@ const stats = [
   { value: "96", label: "Sources", icon: Library },
   { value: "6", label: "Flowcharts", icon: GitBranch },
   { value: "11", label: "Chapters", icon: BookOpen },
-  { value: "90+", label: "Years", icon: Rocket },
+  { value: "12", label: "People", icon: Users },
 ];
 
 // Derived from the data layer so the preview can never drift from the timeline.

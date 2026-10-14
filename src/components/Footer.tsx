@@ -23,7 +23,9 @@ const sections = [
   { href: "/graph", label: "Knowledge Graph" },
   { href: "/course", label: "Course" },
   { href: "/flowcharts", label: "Flowcharts" },
+  { href: "/glossary", label: "Glossary" },
   { href: "/sources", label: "Sources" },
+  { href: "/people", label: "People" },
 ];
 
 export default function Footer() {

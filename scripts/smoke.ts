@@ -133,7 +133,26 @@ await route(
   "sources"
 );
 
-// ── SEO / skin assets ──────────────────────────────────────────
+// ── Glossary ───────────────────────────────────────────────────
+await route(
+  "/glossary",
+  ["Glossary", "Filter 60 terms", "Simple", "Deeper", "Deepest", "Sources"],
+  "glossary"
+);
+
+// ── People ─────────────────────────────────────────────────────
+await route(
+  "/people",
+  [
+    "People",
+    "Alan Turing",
+    "Geoffrey Hinton",
+    "Ashish Vaswani",
+    "Signature contributions",
+    "Chronological",
+  ],
+  "people"
+);
 {
   const home = await get("/");
   checks.push({
@@ -155,11 +174,11 @@ await route(
 
   const sitemap = await get("/sitemap.xml");
   checks.push({
-    label: "sitemap.xml lists all 6 routes",
+    label: "sitemap.xml lists all 8 routes",
     pass:
       sitemap.status === 200 &&
-      ["/timeline", "/course", "/graph", "/flowcharts", "/sources"].every((p) =>
-        sitemap.text.includes(p)
+      ["/timeline", "/course", "/graph", "/flowcharts", "/sources", "/glossary", "/people"].every(
+        (p) => sitemap.text.includes(p)
       ),
     detail: `${(sitemap.text.match(/<url>/g) ?? []).length} urls`,
   });
@@ -177,6 +196,20 @@ await route(
     pass: icon.status === 200 && icon.text.includes("<svg"),
     detail: icon.type,
   });
+
+  // Deep links — the command palette and cross-links depend on these.
+  for (const [path, label] of [
+    ["/timeline?concept=transformer", "timeline deep link (?concept=)"],
+    ["/timeline?era=agents", "timeline deep link (?era=)"],
+    ["/sources?q=attention", "sources deep link (?q=)"],
+  ] as const) {
+    const r = await get(path);
+    checks.push({
+      label,
+      pass: r.status === 200,
+      detail: `${path} → ${r.status}`,
+    });
+  }
 }
 
 // ── report ─────────────────────────────────────────────────────

@@ -11,15 +11,18 @@ flowchart TB
 
     subgraph Routes["App Router routes (all statically prerendered)"]
         HOME["/"]
-        TL["/timeline"]
+        TL["/timeline<br/>deep links: ?era= ?concept="]
         GR["/graph"]
         CO["/course"]
         FL["/flowcharts"]
-        SO["/sources"]
+        GL["/glossary"]
+        PE["/people"]
+        SO["/sources<br/>?q= seeds search"]
     end
 
     subgraph UI["components/"]
-        NAV["Navbar<br/>route-aware active state"]
+        NAV["Navbar<br/>route-aware + More menu"]
+        CMD["CommandPalette<br/>⌘K ranked search"]
         FOOT["Footer<br/>cross-links + GitHub"]
     end
 
@@ -50,11 +53,17 @@ flowchart TB
     NAV --> GR
     NAV --> CO
     NAV --> FL
+    NAV --> GL
+    NAV --> PE
     NAV --> SO
+    CMD --> TL
+    CMD --> SO
     FOOT --> TL
     FOOT --> GR
     FOOT --> CO
     FOOT --> FL
+    FOOT --> GL
+    FOOT --> PE
     FOOT --> SO
 
     MD --> HOME

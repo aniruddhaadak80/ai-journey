@@ -1644,6 +1644,224 @@ export const flowcharts: Flowchart[] = [
 ];
 
 // ═════════════════════════════════════════════════════════════
+// PEOPLE — the researchers who shaped the field
+// ═════════════════════════════════════════════════════════════
+
+export interface Person {
+  id: string;
+  name: string;
+  years: string;
+  role: string;
+  /** One sentence on why they matter. */
+  summary: string;
+  /** Their signature contributions, in order. */
+  contributions: string[];
+  era: string;
+  /** Concept ids they are most associated with. */
+  conceptIds: string[];
+  /** Optional link to a talk or profile. */
+  link?: string;
+  /** Citation count-ish scale marker for the chart: 1-5. */
+  weight: number;
+}
+
+export const people: Person[] = [
+  {
+    id: "turing",
+    name: "Alan Turing",
+    years: "1912–1954",
+    role: "Mathematician — asked the question",
+    summary:
+      "Before there was a field, there was a question. Turing formalised computation itself and then asked whether a machine could think, giving AI both its theoretical foundation and its test.",
+    contributions: [
+      "Turing machine (1936) — the model of computation",
+      "Turing Test (1950) — the operational definition of machine intelligence",
+      "Undecidability of the halting problem — the first proven limit of computation",
+    ],
+    era: "dream",
+    conceptIds: ["turing-machine", "turing-test"],
+    weight: 5,
+  },
+  {
+    id: "mccarthy",
+    name: "John McCarthy",
+    years: "1927–2011",
+    role: "Computer scientist — named the field",
+    summary:
+      "He organised the workshop that gave AI its name, then built the language that would be used to express intelligence for the next three decades.",
+    contributions: [
+      "Coined 'Artificial Intelligence' at Dartmouth (1956)",
+      "Invented LISP (1958) — homoiconicity, garbage collection, the REPL",
+      "Popularised time-sharing and advised on the Lighthill-era funding debates",
+    ],
+    era: "birth",
+    conceptIds: ["dartmouth", "lisp"],
+    weight: 4,
+  },
+  {
+    id: "minsky",
+    name: "Marvin Minsky",
+    years: "1927–2016",
+    role: "Cognitive scientist — co-founder of symbolic AI",
+    summary:
+      "Co-founder of the MIT AI Lab and the era's most forceful advocate of intelligence as symbol manipulation. His 1969 book on perceptrons helped trigger the first AI winter.",
+    contributions: [
+      "Co-directed the MIT AI Lab from 1959",
+      "Perceptrons (1969) — proved single-layer networks cannot learn XOR",
+      "Society of Mind (1986) — intelligence as a society of simple agents",
+    ],
+    era: "birth",
+    conceptIds: ["symbolic-ai", "perceptron"],
+    weight: 4,
+  },
+  {
+    id: "rosenblatt",
+    name: "Frank Rosenblatt",
+    years: "1928–1971",
+    role: "Psychologist — built the first learning machine",
+    summary:
+      "His 1957 Perceptron was the first machine that learned from data rather than from hand-written rules — the ancestor of every neural network since.",
+    contributions: [
+      "The Perceptron (1957) — a trainable single-layer network",
+      "The perceptron learning rule — error-driven weight adjustment",
+    ],
+    era: "birth",
+    conceptIds: ["perceptron", "connectionism"],
+    weight: 3,
+  },
+  {
+    id: "hinton",
+    name: "Geoffrey Hinton",
+    years: "1947–",
+    role: "Computer scientist — godfather of deep learning",
+    summary:
+      "He kept neural networks alive through two AI winters when almost nobody else believed in them, then showed the world how to train deep ones. Turing Award 2018, Nobel Prize in Physics 2024.",
+    contributions: [
+      "Popularised backpropagation (1986)",
+      "Deep belief networks (2006) — the spark of the deep learning era",
+      "Co-authored AlexNet (2012) — the ImageNet moment",
+      "Left Google in 2023 to speak freely about AI risk",
+    ],
+    era: "quiet",
+    conceptIds: ["backpropagation", "alexnet", "dropout", "word2vec"],
+    link: "https://www.youtube.com/watch?v=mgIDG19F3mY",
+    weight: 5,
+  },
+  {
+    id: "lecun",
+    name: "Yann LeCun",
+    years: "1960–",
+    role: "Computer scientist — pioneer of convolutional networks",
+    summary:
+      "He built the network architecture that made deep learning work on images a decade before anyone could train it at scale. Turing Award 2018.",
+    contributions: [
+      "Backpropagation applied to handwritten digit recognition (1989)",
+      "LeNet-5 (1998) — CNNs read ZIP codes and bank cheques",
+      "JEPA / world-model program (2022–) — learning by prediction, not generation",
+    ],
+    era: "quiet",
+    conceptIds: ["resnet", "statistics", "world-models"],
+    weight: 5,
+  },
+  {
+    id: "bengio",
+    name: "Yoshua Bengio",
+    years: "1964–",
+    role: "Computer scientist — theory of representation learning",
+    summary:
+      "He supplied the mathematical framing that made deep learning a discipline rather than a craft, and later became one of its most prominent voices on risk. Turing Award 2018.",
+    contributions: [
+      "Co-authored the backpropagation re-derivation (1986)",
+      "Neural probabilistic language models and word embeddings (2003)",
+      "Scaling of deep learning and its limits (ongoing)",
+    ],
+    era: "quiet",
+    conceptIds: ["backpropagation", "word2vec", "transfer-learning"],
+    weight: 4,
+  },
+  {
+    id: "vaswani",
+    name: "Ashish Vaswani",
+    years: "1985–",
+    role: "Research scientist — wrote the Transformer paper",
+    summary:
+      "The 'Attention Is All You Need' paper he co-authored in 2017 is the single most consequential architecture paper of the era — the foundation of every large language model.",
+    contributions: [
+      "Attention Is All You Need (2017) — self-attention replaces recurrence",
+      "Multi-head attention and positional encoding, still in use today",
+    ],
+    era: "transformer",
+    conceptIds: ["transformer", "attention", "self-attention"],
+    weight: 5,
+  },
+  {
+    id: "karpathy",
+    name: "Andrej Karpathy",
+    years: "1986–",
+    role: "Research scientist — the field's best explainer",
+    summary:
+      "He co-founded OpenAI, led Tesla's Autopilot vision, and then did something rarer: built the explanations that made LLMs comprehensible to everyone else.",
+    contributions: [
+      "CS231n — the course that taught a generation of deep learning",
+      "nanoGPT — a readable, from-scratch GPT implementation",
+      "'Let's build GPT' (2023) and 'State of GPT'",
+    ],
+    era: "transformer",
+    conceptIds: ["gpt", "transformer"],
+    link: "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+    weight: 4,
+  },
+  {
+    id: "hassabis",
+    name: "Demis Hassabis",
+    years: "1976–",
+    role: "Neuroscientist & CEO — builds agents that master games",
+    summary:
+      "DeepMind's founder has repeatedly turned 'AI can't do X' into 'AI just did X': Atari, Go, StarCraft, protein folding. Nobel Prize in Chemistry 2024 for AlphaFold.",
+    contributions: [
+      "Deep-Q learning on Atari (2013–2015)",
+      "AlphaGo defeats Lee Sedol (2016)",
+      "AlphaFold solves protein structure prediction (2020)",
+    ],
+    era: "agents",
+    conceptIds: ["agents", "world-models", "reasoning"],
+    weight: 5,
+  },
+  {
+    id: "altman",
+    name: "Sam Altman",
+    years: "1985–",
+    role: "CEO, OpenAI — shipped the product that changed everything",
+    summary:
+      "He led OpenAI when it decided that a product, not a paper, would determine whether the technology mattered. ChatGPT reached 100 million users in two months.",
+    contributions: [
+      "GPT-3 API and the first commercial LLM products (2020–2021)",
+      "Launched ChatGPT (November 2022)",
+      "OpenAI's stated mission and charter development",
+    ],
+    era: "llm",
+    conceptIds: ["chatgpt", "scaling-laws", "agi"],
+    weight: 4,
+  },
+  {
+    id: "goodfellow",
+    name: "Ian Goodfellow",
+    years: "1985–",
+    role: "Research scientist — invented GANs",
+    summary:
+      "He invented generative adversarial networks in a single evening of argument in a bar. The idea — two networks competing, one generating and one discriminating — dominated generative AI until diffusion arrived.",
+    contributions: [
+      "Generative Adversarial Networks (2014)",
+      "Adversarial examples and adversarial robustness",
+      "Deep Learning textbook (2016) with Bengio and Courville",
+    ],
+    era: "deep-learning",
+    conceptIds: ["diffusion"],
+    weight: 4,
+  },
+];
+
+// ═════════════════════════════════════════════════════════════
 // HELPER FUNCTIONS
 // ═════════════════════════════════════════════════════════════
 
