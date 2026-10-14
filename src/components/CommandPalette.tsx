@@ -67,6 +67,9 @@ export default function CommandPalette({ open: controlled, onOpenChange }: Props
 
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  // Where the user's caret was before opening the dialog, so we can restore
+  // keyboard users' place when it closes.
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   // The index is static; build once per mount rather than per keystroke.
   const index = useMemo(() => buildSearchIndex(), []);
@@ -101,6 +104,20 @@ export default function CommandPalette({ open: controlled, onOpenChange }: Props
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  // Focus management - move focus into the dialog for keyboard/screen-reader
+  // users, and restore it to wherever the caret lived when the dialog closes
+  // (handled in the cleanup, so this stays a pure effect with no extra render).
+  useEffect(() => {
+    if (!open) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const t = window.setTimeout(() => inputRef.current?.focus(), 0);
+    return () => {
+      window.clearTimeout(t);
+      previousFocusRef.current?.focus();
+      previousFocusRef.current = null;
     };
   }, [open]);
 
