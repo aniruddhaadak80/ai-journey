@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
+import MotionProvider from "@/components/MotionProvider";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
 const spaceGrotesk = Space_Grotesk({ variable: "--font-space", subsets: ["latin"], display: "swap" });
@@ -75,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable} dark`}
     >
       <body className="min-h-screen bg-[#050508] text-white antialiased selection:bg-cyan-500/30 selection:text-cyan-100">
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );
