@@ -11,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/course", priority: 0.9, freq: "monthly" as const },
     { path: "/graph", priority: 0.8, freq: "monthly" as const },
     { path: "/flowcharts", priority: 0.8, freq: "monthly" as const },
+    { path: "/map", priority: 0.7, freq: "monthly" as const },
+    { path: "/compare", priority: 0.7, freq: "monthly" as const },
     { path: "/glossary", priority: 0.8, freq: "weekly" as const },
     { path: "/sources", priority: 0.7, freq: "weekly" as const },
     { path: "/people", priority: 0.7, freq: "monthly" as const },

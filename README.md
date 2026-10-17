@@ -47,7 +47,7 @@
 
 **AI Journey** is a single, self-contained website that teaches the *whole* history of AI — and makes every claim traceable to its primary source.
 
-Most AI "learning" sites pick one lens: a blog post, a video series, a textbook chapter. This one ships **seven lenses over the same dataset**, so you can move between them without losing your place:
+Most AI "learning" sites pick one lens: a blog post, a video series, a textbook chapter. This one ships **nine lenses over the same dataset**, so you can move between them without losing your place:
 
 | | Lens | Question it answers |
 |---|---|---|
@@ -57,6 +57,8 @@ Most AI "learning" sites pick one lens: a blog post, a video series, a textbook 
 | 🔀 | **Flowcharts** | *How does this machinery actually work?* |
 | 📖 | **Glossary** | *What does this term mean — quickly, at my level?* |
 | 🧑‍🔬 | **People** | *Who settled this, and where did they say it?* |
+| 🌍 | **Map** | *Where did AI milestones actually happen?* |
+| ⚖️ | **Compare** | *Two concepts, side by side, at every depth.* |
 | 🔗 | **Source Library** | *Where does this claim actually come from?* |
 
 Everything is reachable from anywhere: press **⌘K** anywhere for the command palette, or follow a deep link like `/timeline?concept=transformer` — every page renders from the same dataset.
@@ -76,6 +78,7 @@ Everything is reachable from anywhere: press **⌘K** anywhere for the command p
 | Concepts, each × 3 depth levels | **60** |
 | Sources (papers, videos, blogs, essays, talks, books) | **96** |
 | People — researchers with contributions + links | **12** |
+| Map milestones worldwide (lat/lng pinned) | **21** |
 | Course chapters | **11** |
 | Interactive flowcharts | **6** |
 | Knowledge graph nodes / labelled edges | **53** / **50** |

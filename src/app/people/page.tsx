@@ -6,6 +6,7 @@ import { ExternalLink, Award, Sparkles, ArrowUpDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { people, eras, getConcept, type Person } from "@/data/content";
+import { ReadingBadge } from "@/components/ReadingBadge";
 
 const MAX_WEIGHT = 5;
 
@@ -228,6 +229,13 @@ function PersonCard({ person, index }: { person: Person; index: number }) {
               {c.name}
             </a>
           ))}
+        </div>
+      )}
+
+      {/* Reading progress across this researcher's concepts */}
+      {concepts.length > 0 && (
+        <div className="mb-2">
+          <ReadingBadge conceptId={concepts[0].id} compact />
         </div>
       )}
 

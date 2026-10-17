@@ -10,6 +10,8 @@ import {
   Network,
   BookOpen,
   GitBranch,
+  Globe,
+  Scale,
   Library,
   Users,
   BookMarked,
@@ -26,12 +28,14 @@ const primaryNav = [
   { href: "/graph", label: "Graph", icon: Network },
   { href: "/course", label: "Course", icon: BookOpen },
   { href: "/flowcharts", label: "Flowcharts", icon: GitBranch },
+  { href: "/map", label: "Map", icon: Globe, hint: "AI milestones worldwide" },
 ];
 
 const moreNav = [
   { href: "/sources", label: "Source Library", icon: Library, hint: "96 papers & videos" },
   { href: "/people", label: "People", icon: Users, hint: "12 researchers" },
-  { href: "/glossary", label: "Glossary", icon: BookMarked, hint: "60 terms, A–Z" },
+  { href: "/glossary", label: "Glossary", icon: BookMarked, hint: "60 terms, A-Z" },
+  { href: "/compare", label: "Compare", icon: Scale, hint: "Concepts side by side" },
 ];
 
 const GITHUB_URL = "https://github.com/aniruddhaadak80/ai-journey";

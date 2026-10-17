@@ -140,6 +140,28 @@ await route(
   ],
   "people"
 );
+
+// ── Map ─────────────────────────────────────────────────────
+await route(
+  "/map",
+  [
+    "AI on the Map",
+    "Cambridge, UK", // first map pin
+    "Dartmouth, NH, USA", // the 1956 milestone
+    "All eras",
+    "Open in timeline",
+    "Equirectangular",
+  ],
+  "map"
+);
+
+// ── Compare ─────────────────────────────────────────────────
+await route(
+  "/compare",
+  ["Concept Comparison", "Transformer", "Attention", "Depth levels", "vs"],
+  "compare"
+);
+
 {
   const home = await get("/");
   checks.push({

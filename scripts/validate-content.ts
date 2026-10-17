@@ -19,6 +19,7 @@ import {
   flowcharts,
   graphNodes,
   graphEdges,
+  mapLocations,
 } from "../src/data/content";
 
 type Problem = { kind: string; detail: string };
@@ -137,6 +138,30 @@ const personIds = new Set(people.map((p) => p.id));
 }
 void personIds;
 
+// ── mapLocations ───────────────────────────────────────────────
+// The /map lens projects lat/lng onto an SVG canvas, so out-of-range
+// coordinates would silently render a pin outside the graticule.
+{
+  const seen = new Set<string>();
+  for (const l of mapLocations) {
+    if (seen.has(l.id)) add("duplicate-id", `mapLocation: "${l.id}"`);
+    seen.add(l.id);
+    if (!eraIds.has(l.era))
+      add("map->era", `mapLocation "${l.id}" -> missing era "${l.era}"`);
+    if (!Number.isFinite(l.lat) || l.lat < -90 || l.lat > 90)
+      add("map-coord", `mapLocation "${l.id}" lat out of range: ${l.lat}`);
+    if (!Number.isFinite(l.lng) || l.lng < -180 || l.lng > 180)
+      add("map-coord", `mapLocation "${l.id}" lng out of range: ${l.lng}`);
+    if (!Number.isInteger(l.year))
+      add("map-field", `mapLocation "${l.id}" year is not an integer`);
+    if (!l.label?.trim()) add("map-field", `mapLocation "${l.id}" has no label`);
+    if (!l.description?.trim())
+      add("map-field", `mapLocation "${l.id}" has no description`);
+    if (!l.link.startsWith("/"))
+      add("map-link", `mapLocation "${l.id}" link must be site-relative`);
+  }
+}
+
 // ── reachability: every concept must be reachable from some era ─
 const reachable = new Set(eras.flatMap((e) => e.concepts));
 for (const c of concepts) {
@@ -150,6 +175,7 @@ console.log("── content inventory ──");
 console.log(`eras          ${eras.length}`);
 console.log(`concepts      ${concepts.length}`);
 console.log(`people        ${people.length}`);
+console.log(`map locations ${mapLocations.length}`);
 console.log(`sources       ${sources.length}  (${videos} video/talk)`);
 console.log(`chapters      ${chapters.length}`);
 console.log(`flowcharts    ${flowcharts.length}`);

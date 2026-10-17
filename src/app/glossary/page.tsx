@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import { eras, sources, sourceKindColors, type Level } from "@/data/content";
 import { glossaryTerms } from "@/lib/search";
 import { FileText, Play, PenLine, BookOpen, Library, Mic, Code, type LucideIcon } from "lucide-react";
+import { ReadingBadge } from "@/components/ReadingBadge";
 
 const kindIcons: Record<string, LucideIcon> = {
   paper: FileText,
@@ -245,6 +246,7 @@ export default function GlossaryPage() {
                           Open in the timeline
                           <ExternalLink className="w-3 h-3" />
                         </Link>
+                        <ReadingBadge conceptId={concept.id} compact />
                       </div>
                     </motion.details>
                   );

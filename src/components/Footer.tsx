@@ -24,6 +24,8 @@ const sections = [
   { href: "/course", label: "Course" },
   { href: "/flowcharts", label: "Flowcharts" },
   { href: "/glossary", label: "Glossary" },
+  { href: "/map", label: "Map" },
+  { href: "/compare", label: "Compare" },
   { href: "/sources", label: "Sources" },
   { href: "/people", label: "People" },
 ];
