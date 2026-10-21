@@ -92,6 +92,28 @@ describe("searchIndex", () => {
       expect(hits[i - 1].score).toBeGreaterThanOrEqual(hits[i].score);
     }
   });
+
+  test("a concept whose body contains the query is still returned", () => {
+    // The body match is a bonus on top of the title score, so it can never score below
+    // zero: `searchIndex` keeps only scores above zero, and a negative bonus would drop
+    // the very concept the body match found. The query is derived from the dataset so the
+    // test does not depend on a particular wording surviving an edit.
+    const phrase = "ensemble learning";
+    const target = concepts.find((c) =>
+      `${c.simple} ${c.deeper} ${c.deepest}`.toLowerCase().includes(phrase),
+    );
+    expect(target).toBeDefined();
+    const hits = searchIndex(phrase, INDEX, { limit: 1000 });
+    expect(hits.some((h) => h.kind === "concept" && h.id === target!.id)).toBe(true);
+  });
+
+  test("every returned hit scores above zero", () => {
+    for (const query of ["learning", "ensemble learning", "the", "quiet revolution"]) {
+      for (const hit of searchIndex(query, INDEX, { limit: 1000 })) {
+        expect(hit.score).toBeGreaterThan(0);
+      }
+    }
+  });
 });
 
 /**
