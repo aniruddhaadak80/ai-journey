@@ -10,6 +10,19 @@ type ProgressEntry = Record<Depth, boolean>;
 
 type Store = Map<string, ProgressEntry>;
 
+/**
+ * The snapshot for a concept with no saved progress, and the empty store the
+ * server render sees.
+ *
+ * WHY module-level constants rather than inline object literals: `getSnapshot`
+ * must return a referentially stable value — React compares snapshots with
+ * `Object.is`, and a fresh `{ simple: false, ... }` on every call is a
+ * re-render loop waiting to happen (plus a dev warning saying exactly that).
+ * `use-recent.ts` caches its snapshot for the same reason; this file did not.
+ */
+const EMPTY_PROGRESS: ProgressEntry = { simple: false, deeper: false, deepest: false };
+const EMPTY_STORE: Store = new Map();
+
 // Load persisted progress once on first access (client only).
 let store: Store = (() => {
   if (typeof window === "undefined") return new Map();
@@ -49,8 +62,8 @@ function emit() {
 export function useReadingProgress(conceptId: string) {
   const snapshot = useSyncExternalStore(
     subscribe,
-    () => store.get(conceptId) ?? { simple: false, deeper: false, deepest: false },
-    () => ({ simple: false, deeper: false, deepest: false })
+    () => store.get(conceptId) ?? EMPTY_PROGRESS,
+    () => EMPTY_PROGRESS
   );
 
   const toggle = useCallback(
@@ -76,7 +89,7 @@ export function useReadingProgress(conceptId: string) {
 }
 
 export function useOverallReadingProgress() {
-  const snapshot = useSyncExternalStore(subscribe, () => store, () => new Map());
+  const snapshot = useSyncExternalStore(subscribe, () => store, () => EMPTY_STORE);
 
   const conceptIds = useMemo(() => Array.from(snapshot.keys()), [snapshot]);
 
