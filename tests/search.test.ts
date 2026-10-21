@@ -94,6 +94,74 @@ describe("searchIndex", () => {
   });
 });
 
+/**
+ * The scoring constants above are the search's public behavior — the comment in
+ * `src/lib/search.ts` promises "a prefix match on a name is worth far more than
+ * a substring match buried in a long paragraph". These tests pin the arithmetic
+ * with synthetic items, so a future tweak to a weight is a deliberate diff in a
+ * test rather than a silent reordering on the live dataset.
+ */
+describe("scoring contract", () => {
+  const make = (id: string, title: string, subtitle: string): SearchItem => ({
+    id,
+    kind: "concept",
+    title,
+    subtitle,
+    href: `/timeline?concept=${id}`,
+    score: 0,
+  });
+
+  test("pins the documented weights: exact 100, prefix 60, substring 25, absent -50", () => {
+    const items = [
+      make("exact", "attention", "zzz"),
+      make("prefix", "attention span", "zzz"),
+      make("substring", "on attention", "zzz"),
+    ];
+    const scores = new Map(searchIndex("attention", items).map((hit) => [hit.id, hit.score]));
+    // rank = title * 3 + subtitle; "zzz" is a term the subtitle does not contain.
+    expect(scores.get("exact")).toBe(100 * 3 - 50);
+    expect(scores.get("prefix")).toBe(60 * 3 - 50);
+    expect(scores.get("substring")).toBe(25 * 3 - 50);
+  });
+
+  test("ranks the three match classes in order", () => {
+    const items = [
+      make("a-substring", "on attention", "zzz"),
+      make("b-prefix", "attention span", "zzz"),
+      make("c-exact", "attention", "zzz"),
+    ];
+    expect(searchIndex("attention", items).map((hit) => hit.id)).toEqual([
+      "c-exact",
+      "b-prefix",
+      "a-substring",
+    ]);
+  });
+
+  test("a subtitle-only match surfaces but floors at the weakest score", () => {
+    const items = [make("sub", "zzz", "attention"), make("title", "attention", "zzz")];
+    const hits = searchIndex("attention", items);
+    expect(hits.map((hit) => hit.id)).toEqual(["title", "sub"]);
+    // Positive, so callers can filter on > 0, but weaker than any title match.
+    expect(hits.find((hit) => hit.id === "sub")?.score).toBe(1);
+  });
+
+  test("ties break alphabetically by title", () => {
+    const items = [make("b", "beta attention", "zzz"), make("a", "alpha attention", "zzz")];
+    expect(searchIndex("attention", items).map((hit) => hit.id)).toEqual(["a", "b"]);
+  });
+
+  test("dedupes and case-folds the query before scoring", () => {
+    const items = [make("a", "attention span", "zzz")];
+    expect(searchIndex("Attention attention", items)).toEqual(searchIndex("attention", items));
+  });
+
+  test("limit 0 returns nothing and limit 1 returns the strongest hit", () => {
+    const items = [make("a", "attention", "zzz"), make("b", "attention span", "zzz")];
+    expect(searchIndex("attention", items, { limit: 0 })).toEqual([]);
+    expect(searchIndex("attention", items, { limit: 1 }).map((hit) => hit.id)).toEqual(["a"]);
+  });
+});
+
 describe("glossaryTerms", () => {
   test("groups every concept exactly once", () => {
     const grouped = glossaryTerms();
