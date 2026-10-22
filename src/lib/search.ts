@@ -27,6 +27,9 @@ export interface SearchItem {
 
 const norm = (s: string) => s.toLowerCase();
 
+/** What a match in a concept's own body text is worth on top of the title score. */
+const BODY_MATCH_BONUS = 8;
+
 function scoreField(value: string, terms: string[]): number {
   const v = norm(value);
   let total = 0;
@@ -90,23 +93,39 @@ export interface SearchOptions {
 }
 
 /**
+ * The concept's own text, when it contains the whole query.
+ *
+ * Depth-weighted: the concept's own text is searchable at all three levels. Returns the
+ * bonus a body match is worth, or `null` when the body does not contain the query.
+ */
+function bodyBonus(item: SearchItem, query: string): number | null {
+  if (item.kind !== "concept") return null;
+  const c = getConcept(item.id);
+  if (!c) return null;
+  const q = norm(query);
+  const body = norm(`${c.simple} ${c.deeper} ${c.deepest}`);
+  return body.includes(q) ? BODY_MATCH_BONUS : null;
+}
+
+/**
  * Rank a query against an item. Returns 0 when nothing matched, so callers can
  * filter on `> 0` without re-deriving the match.
  */
 function rank(item: SearchItem, terms: string[], query: string): number {
   const title = scoreField(item.title, terms);
   const sub = scoreField(item.subtitle, terms);
-  if (title <= -50 && sub <= -50) return 0;
 
-  // Depth-weighted: the concept's own text is searchable at all three levels.
-  if (item.kind === "concept") {
-    const c = getConcept(item.id);
-    if (c) {
-      const q = norm(query);
-      const body = norm(`${c.simple} ${c.deeper} ${c.deepest}`);
-      if (body.includes(q)) return title + 8;
-    }
+  // A body match is a *bonus*, so it must never score below the floor a weak match gets.
+  // `scoreField` charges -50 for every query term the field does not contain, so a title
+  // that misses a term is negative -- and a bonus added to a negative title could take the
+  // whole score below zero. The caller keeps only scores above zero, so the one path that
+  // finds a concept the title and subtitle missed would be the path that drops it.
+  const bonus = bodyBonus(item, query);
+  if (bonus !== null) {
+    return Math.max(title, 0) + bonus;
   }
+
+  if (title <= -50 && sub <= -50) return 0;
 
   const total = title * 3 + sub;
   return total > 0 ? total : 1;
