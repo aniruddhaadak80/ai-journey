@@ -28,7 +28,7 @@ jobs:
       # restored cache still resolves every package through bun.lock, so the
       # install stays exactly the one the lockfile was reviewed for.
       - name: Cache Bun's install cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
@@ -85,7 +85,7 @@ jobs:
       # restored cache still resolves every package through bun.lock, so the
       # install stays exactly the one the lockfile was reviewed for.
       - name: Cache Bun's install cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.bun/install/cache
           key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
