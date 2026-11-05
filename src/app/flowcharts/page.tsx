@@ -232,7 +232,7 @@ function FlowchartViewer({ flowchart }: { flowchart: Flowchart }) {
                 {nodeMap.get(selectedNode)!.type}
               </span>
             </div>
-            <div className="text-sm font-medium">{nodeMap.get(selectedNode)!.label.replace("\n", " ")}</div>
+            <div className="text-sm font-medium">{nodeMap.get(selectedNode)!.label.replace(/\n/g, " ")}</div>
           </motion.div>
         )}
       </AnimatePresence>
