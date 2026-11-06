@@ -49,7 +49,7 @@ for (const f of files) {
     problems.push("contains NaN/undefined/Infinity in an attribute");
   }
 
-  const rel = f.replace(ROOT + "\\", "").replace(/\//g, "/");
+  const rel = f.replace(ROOT + "\\", "");
   if (problems.length) {
     failed++;
     console.log(`FAIL ${rel}`);
